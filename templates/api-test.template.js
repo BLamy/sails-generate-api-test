@@ -10,6 +10,7 @@ var should  = require('chai').should();
 
 describe('<%= modelName %> API', function() {
   var sessionCookie;
+  var createdModel;
 
   before(function(done) {
     request(sails.hooks.http.app)
@@ -38,10 +39,11 @@ describe('<%= modelName %> API', function() {
       .expect(201)
       .end(function(err, res) {
         var reply = res.body;
+        createdModel = reply.<%= camelModelName %>
         should.not.exist(err);
         // reply.<%= camelModelName %>.name.should.equal('Test Name');
 
-        <%= modelName %>.findOne(reply.<%= camelModelName %>.id, function(err, result) {
+        <%= modelName %>.findOne(createdModel.id, function(err, result) {
           should.not.exist(err);
           should.exist(result);
           // result.name.should.equal('Test Name');
@@ -65,20 +67,20 @@ describe('<%= modelName %> API', function() {
   
   it('should find a model', function(done) {
     request(sails.hooks.http.app)
-      .get('/<%= pluralModelName %>/1')
+      .get('/<%= pluralModelName %>/'+createdModel.id)
       .set('cookie', sessionCookie)
       .expect(200)
       .end(function(err, res) {
         var reply = res.body;
         should.not.exist(err);
-        reply.<%= camelModelName %>.id.should.equal(1);
+        reply.<%= camelModelName %>.id.should.equal(createdModel.id);
         done();
       });
   });
   
   it('should update a model', function(done) {
     request(sails.hooks.http.app)
-      .put('/<%= pluralModelName %>/1')
+      .put('/<%= pluralModelName %>/'+createdModel.id)
       .set('cookie', sessionCookie)
       .send({
         <%= camelModelName %> : {
@@ -92,7 +94,7 @@ describe('<%= modelName %> API', function() {
         should.not.exist(err);
         // reply.<%= camelModelName %>.name.should.equal('NEW');
 
-        <%= modelName %>.findOne(1, function(err, result) {
+        <%= modelName %>.findOne(createdModel.id, function(err, result) {
           should.not.exist(err);
           should.exist(result);
           // result.name.should.equal('NEW');
@@ -103,14 +105,14 @@ describe('<%= modelName %> API', function() {
   
   it('should delete a model', function(done) {
     request(sails.hooks.http.app)
-      .delete('/<%= pluralModelName %>/1')
+      .delete('/<%= pluralModelName %>/'+createdModel.id)
       .set('cookie', sessionCookie)
       .expect(200)
       .end(function(err, res) {
         should.not.exist(err);
         (res.body || {}).should.be.empty;
 
-        <%= modelName %>.findOne(1, function(err, result) {
+        <%= modelName %>.findOne(createdModel.id, function(err, result) {
           should.not.exist(err);
           should.not.exist(result);
           done();
