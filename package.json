@@ -1,6 +1,6 @@
 {
   "name": "sails-generate-api-test",
-  "version": "0.10.3",
+  "version": "0.10.4",
   "description": "sails generate api-test",
   "main": "Generator.js",
   "scripts": {
