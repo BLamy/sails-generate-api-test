@@ -108,7 +108,7 @@ describe('<%= modelName %> API', function() {
       .expect(200)
       .end(function(err, res) {
         should.not.exist(err);
-        should.not.exist(res.body);
+        (res.body || {}).should.be.empty;
 
         <%= modelName %>.findOne(1, function(err, result) {
           should.not.exist(err);
