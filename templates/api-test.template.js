@@ -60,7 +60,7 @@ describe('<%= modelName %> API', function() {
       .end(function(err, res) {
         var reply = res.body;
         should.not.exist(err);
-        reply.<%= camelModelName %>.length.should.be.above(0);
+        reply.<%= pluralCamel %>.length.should.be.above(0);
         done();
       });
   });

@@ -58,7 +58,8 @@ module.exports = {
     _.defaults(scope, {
       modelName       : modelName,
       pluralModelName : pluralize(modelName).toLowerCase(),
-      camelModelName  : _.camelCase(modelName)
+      camelModelName  : _.camelCase(modelName),
+      pluralCamel     : pluralize(_.camelCase(modelName))
     });
 
     // Decide the output filename for use in targets below:
