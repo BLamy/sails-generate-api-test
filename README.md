@@ -1,6 +1,6 @@
-# sails-generate-ds-api-test
+# sails-generate-api-test
 
-A `ds-api-test` generator for use with the Sails command-line interface.
+An `api-test` generator for use with the Sails command-line interface, using [chai](http://chaijs.com/) and [supertest](https://github.com/visionmedia/supertest).  An easy way to strap up API acceptance tests.
 
 Certain generators are installed by default in Sails, but they can be overridden.  Other generators create entirely new things.  Check the [Sails docs](http://sailsjs.org/#!documentation) for information on installing generator overrides / custom generators and information on building your own generators.
 
@@ -9,7 +9,7 @@ Certain generators are installed by default in Sails, but they can be overridden
 ### Installation
 
 ```sh
-$ npm install sails-generate-ds-api-test
+$ npm install sails-generate-api-test
 ```
 
 
@@ -18,7 +18,7 @@ $ npm install sails-generate-ds-api-test
 ##### On the command line
 
 ```sh
-$ sails generate ds-api-test 
+$ sails generate api-test [modelName]
 ```
 
 
