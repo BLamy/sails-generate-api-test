@@ -66,37 +66,20 @@ module.exports = {
     scope.filename = scope.args[0] + '.js';
 
     // Add other stuff to the scope for use in our templates:
-    scope.whatIsThis = 'an example file created at '+scope.createdAt;
+    scope.whatIsThis = 'an example file created at ' + scope.createdAt;
 
+    // Conditionally use the role test if they provide a role argument
+    if (scope.args[1]) {
+      scope.role = scope.args[1];
+      this.targets['./test/integration/api/:modelName/:role.js'] = { template: 'api-role-test.template.js' };
+    } else {
+      this.targets['./test/integration/api/:filename'] = { template: 'api-test.template.js' };
+    }
+    
     // When finished, we trigger a callback with no error
     // to begin generating files/folders as specified by
     // the `targets` below.
     cb();
-  },
-
-
-
-  /**
-   * The files/folders to generate.
-   * @type {Object}
-   */
-
-  targets: {
-
-    // Usage:
-    // './path/to/destination.foo': { someHelper: opts }
-
-    // Creates a dynamically-named file relative to `scope.rootPath`
-    // (defined by the `filename` scope variable).
-    //
-    // The `template` helper reads the specified template, making the
-    // entire scope available to it (uses underscore/JST/ejs syntax).
-    // Then the file is copied into the specified destination (on the left).
-    './test/integration/api/:filename': { template: 'api-test.template.js' },
-
-    // Creates a folder at a static path
-    // './test/integration/api': { folder: {} }
-
   },
 
 
