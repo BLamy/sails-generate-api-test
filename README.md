@@ -9,7 +9,7 @@ Certain generators are installed by default in Sails, but they can be overridden
 ### Installation
 
 ```sh
-$ npm install sails-generate-api-test
+$ npm install https://git@github.com:BLamy/sails-generate-api-test.git
 ```
 
 
@@ -21,6 +21,9 @@ $ npm install sails-generate-api-test
 $ sails generate api-test [modelName]
 ```
 
+```sh
+$ sails generate api-test [modelName] [roleName]
+```
 
 
 ### Development
